@@ -33,8 +33,11 @@ pipeline {
     }
 
     post {
-        success {
-            build job: 'bank-portal-frontend-cd'
+         success {
+            echo '🚀 CI Deployment successful'
+        }
+        failure {
+            echo '❌ CI Deployment failed'
         }
     }
 }
