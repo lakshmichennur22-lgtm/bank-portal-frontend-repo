@@ -1,0 +1,45 @@
+/* App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #002f6c;
+  padding: 1rem;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  background-color: #004080;
+  color: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.menu-item:hover {
+  background-color: #0059b3;
+}
+
+.menu-item.active {
+  background-color: #0066cc;
+  font-weight: bold;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f4f6fa;
+}

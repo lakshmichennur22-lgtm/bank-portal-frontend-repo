@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_DEFAULT_REGION = 'us-east-1'
+        S3_BUCKET = 'bank-portal-frontend-s3'
+    }
+
+    stages {
+
+        stage('Download Build Artifacts') {
+            steps {
+                copyArtifacts(
+                    projectName: 'bank-portal-frontend-ci',
+                    selector: lastSuccessful()
+                )
+            }
+        }
+
+        stage('Deploy to S3') {
+            steps {
+                withCredentials([
+                    [$class: 'AmazonWebServicesCredentialsBinding',
+                     credentialsId: 'Adithya']
+                ]) {
+                    sh '''
+                        aws s3 sync build/ s3://$S3_BUCKET --delete
+                    '''
+                }
+            }
+        }
+
+        stage('Print Website URL') {
+            steps {
+                sh '''
+                    echo "======================================="
+                    echo "Frontend URL:"
+                    echo "http://$S3_BUCKET.s3-website-$AWS_DEFAULT_REGION.amazonaws.com"
+                    echo "======================================="
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '🚀 CD Deployment successful'
+        }
+        failure {
+            echo '❌ CD Deployment failed'
+        }
+    }
+}
