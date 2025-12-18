@@ -12,6 +12,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
+                    cd bank-portal-frontend-repo
                     npm install
                 '''
             }
@@ -20,6 +21,7 @@ pipeline {
         stage('Build Vite App') {
             steps {
                 sh '''
+                    cd bank-portal-frontend-repo
                     npm run build
                 '''
             }
@@ -27,7 +29,7 @@ pipeline {
 
         stage('Archive Build Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'build/**', fingerprint: true
+                archiveArtifacts artifacts: 'dist/**', fingerprint: true
             }
         }
     }
