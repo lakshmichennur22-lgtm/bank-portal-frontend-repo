@@ -1,0 +1,9 @@
+variable "project" {}
+variable "application" {}
+variable "environment" {}
+variable "location" {}
+variable "location_short" {}
+variable "blockcode" {}
+variable "acr_name" {}
+variable "acr_resource_group_name" {}
+variable "acr_password" {}
