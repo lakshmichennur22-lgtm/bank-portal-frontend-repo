@@ -1,19 +1,19 @@
 FROM node:18
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /frontend
 
-# Copy package files
-COPY package*.json ./
+# Copy package files from frontend folder
+COPY frontend/package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy project source
-COPY . .
+# Copy frontend source code
+COPY frontend/ .
 
 # Expose application port
 EXPOSE 3000
 
-# Start app
+# Start the app
 CMD ["npm", "start"]
